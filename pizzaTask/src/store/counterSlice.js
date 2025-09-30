@@ -5,14 +5,14 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addOne: (state) => {
-      state.value += 1;
+      state.value += 1
       //   this.state.value += 1;
     },
     minsOne: (state) => {
       state.value -= 1;
     },
-    setName: (state) => {
-      state.name = "mohamed";
+    setName: (state, action) => {
+      state.name = action.payload;
     },
   },
 });
