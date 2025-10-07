@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now, immutable: true },
   updatedAt: { type: Date, default: Date.now },
   bestFriend: { type: mongoose.SchemaTypes.ObjectId, ref: "User" },
-  hobbies: [String],
   address: {
     city: String,
     street: String,
@@ -33,6 +32,6 @@ userSchema.virtual("namedEmail").get(function () {
 });
 userSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
-  next()
+  next();
 });
 export const User = mongoose.model("User", userSchema);

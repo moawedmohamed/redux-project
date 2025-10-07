@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getAllPosts } from "../api/postApi";
-const initialState = { posts: [], isLoading: false, error: null };
+import { getAllPosts, getAllTodos } from "../api/postApi";
+const initialState = { posts: [], todo: [], isLoading: false, error: null };
 
 const postSlice = createSlice({
   name: "post",
@@ -20,6 +20,23 @@ const postSlice = createSlice({
       console.log("fulfilled", action);
     });
     builder.addCase(getAllPosts.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action?.error?.message;
+      console.log("rejected", action);
+    });
+    // todos slices
+    builder.addCase(getAllTodos.pending, (state, action) => {
+      state.isLoading = true;
+      state.error = null;
+      console.log("pending", action);
+    });
+    builder.addCase(getAllTodos.fulfilled, (state, action) => {
+      state.posts = action.payload;
+      state.isLoading = false;
+      state.error = null;
+      console.log("fulfilled", action);
+    });
+    builder.addCase(getAllTodos.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action?.error?.message;
       console.log("rejected", action);

@@ -8,12 +8,13 @@ import { getAllPosts } from "../api/postApi";
 const Index = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.postdata.posts);
+  const todo = useSelector((state) => state.postdata.todo);
   const isLoading = useSelector((state) => state.postdata.isLoading);
   const isError = useSelector((state) => state.postdata.error);
   useEffect(() => {
-    dispatch(getAllPosts());
+    dispatch(getAllPosts('https://jsonplaceholder.typicode.com/posts'));
   }, [dispatch]);
-  console.log(posts);
+  console.log(todo);
 
   return (
     <div>
@@ -29,6 +30,7 @@ const Index = () => {
             </div>
           );
         })}
+      
     </div>
   );
 };
